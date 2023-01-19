@@ -1,8 +1,10 @@
 import React from "react";
 import { FaFacebook } from "react-icons/fa";
 import { BsTwitter } from "react-icons/bs";
+import { RiWhatsappFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import SingleArticleReco from "../components/SingleArticleReco";
+import SocialShare from "../components/SocialShare";
 import banner from "../images/banner.svg";
 import Author from "../images/author.jpeg";
 import Eyes from "../images/eyes.png";
@@ -12,12 +14,10 @@ const SingleArticle = () => {
     <>
       <div className="article-container">
         <div className="article-title">
-          <Link to="/article">
-            <h1>
-              A few words about this blog platform, Ghost, and how this site was
-              made
-            </h1>
-          </Link>
+          <h1>
+            A few words about this blog platform, Ghost, and how this site was
+            made
+          </h1>
         </div>
 
         <div className="article-subtitle">
@@ -33,12 +33,14 @@ const SingleArticle = () => {
         <hr className="hr2-line" />
 
         <div className="author-detail">
-          <div>
+          <div className="author-flex">
             <img src={Author} alt="author" className="author-image" />
-          </div>
-          <div className="article-info">
-            <span className="author-name">Vishal Thakur</span>
-            <span className="publish-dateTime">Apr 15, 2020 . 4 min read</span>
+            <div className="article-info">
+              <span className="author-name">Vishal Thakur</span>
+              <span className="publish-dateTime">
+                Apr 15, 2020 . 4 min read
+              </span>
+            </div>
           </div>
           <div className="author-social-link">
             <span>
@@ -49,6 +51,11 @@ const SingleArticle = () => {
             <span>
               <Link>
                 <BsTwitter />
+              </Link>
+            </span>
+            <span>
+              <Link>
+                <RiWhatsappFill />
               </Link>
             </span>
           </div>
@@ -75,16 +82,7 @@ const SingleArticle = () => {
           </p>
 
           <div className="article-socialShare">
-            <span>
-              <Link>
-                <FaFacebook /> Share on Facebook
-              </Link>
-            </span>
-            <span>
-              <Link>
-                <BsTwitter /> Share on Twitter
-              </Link>
-            </span>
+            <SocialShare />
           </div>
 
           <div className="article-tags">

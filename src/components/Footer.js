@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <div className="footer">
       <div>
-        <ul className="article-tagList">
+        <ul className="article-tagLists">
           <li>Digital product design</li>
           <li>Remote work</li>
           <li>UX design</li>
