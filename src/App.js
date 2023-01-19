@@ -18,10 +18,10 @@ function App() {
       path: "/about",
       Component: <About />,
     },
-    // {
-    //   path: "/article",
-    //   Component: <SingleArticle />,
-    // },
+    {
+      path: "/article",
+      Component: <SingleArticle />,
+    },
   ];
   return (
     <Routes>

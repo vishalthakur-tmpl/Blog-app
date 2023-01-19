@@ -36,7 +36,7 @@ const SingleArticleReco = () => {
   ];
 
   return (
-    <div>
+    <>
       {posts.map((post) => (
         <div className="postsItems" key={post.id}>
           <img src={post.img} alt={`blog${post.id}`} />
@@ -45,7 +45,7 @@ const SingleArticleReco = () => {
           </Link>
         </div>
       ))}
-    </div>
+    </>
   );
 };
 
