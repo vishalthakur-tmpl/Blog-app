@@ -385,7 +385,7 @@ nav a{
   border-radius: 50%;
 }
 
-.image-on-hr4{
+/* .image-on-hr4{
   position: relative;
   margin-top: 90px;
   margin-bottom: 50px;
@@ -402,6 +402,28 @@ nav a{
   left: 50%;
   width: 12%;
   transform: translateX(-50%);
+} */
+
+.image-on-hr4{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.hr4-line {
+  width: 100%;
+  margin: 0;
+  border: 0;
+  height: 2px;
+  background-color: #333;
+  position: relative;
+}
+
+.eyes-on-hr4 {
+  position: absolute;
+  max-width: 15%;
+  max-height: 100%;
+  z-index: 1;
 }
 
 .readNext{
