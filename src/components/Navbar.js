@@ -27,7 +27,6 @@ const Navbar = () => {
           </button>
         </form>
       </div>
-
       <div className={showIcon ? "nav_link nav-active" : "nav_link"}>
         <NavLink
           exact={getValue.toString()}
