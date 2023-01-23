@@ -2,7 +2,7 @@ import React from "react";
 import { FaFacebook } from "react-icons/fa";
 import { BsTwitter } from "react-icons/bs";
 import { RiWhatsappFill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import SingleArticleReco from "../components/SingleArticleReco";
 import SocialShare from "../components/SocialShare";
 import banner from "../images/banner.svg";
@@ -10,6 +10,9 @@ import Author from "../images/author.jpeg";
 import Eyes from "../images/eyes.png";
 
 const SingleArticle = () => {
+  // eslint-disable-next-line
+  const { blogId } = useParams();
+
   return (
     <>
       <div className="article-container">

@@ -3,6 +3,8 @@ import React from "react";
 import logoWhite from "../images/logo-white.svg";
 
 const Footer = () => {
+  // const year = new Date().getFullYear();
+
   return (
     <div className="footer">
       <div>
@@ -46,7 +48,10 @@ const Footer = () => {
         </div>
 
         <div className="copyright">
-          <p> &copy; 2023-2024 Nordic Rose Co. All rights reserved</p>
+          <p>
+            &copy; {new Date().getFullYear()} Nordic Rose Co. All rights
+            reserved
+          </p>
         </div>
       </div>
     </div>

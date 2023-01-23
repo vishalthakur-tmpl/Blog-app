@@ -19,7 +19,7 @@ function App() {
       Component: <About />,
     },
     {
-      path: "/article",
+      path: "/article/:blogId",
       Component: <SingleArticle />,
     },
   ];
