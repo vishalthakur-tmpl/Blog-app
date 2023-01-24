@@ -8,9 +8,9 @@ const AllArticles = ({ posts }) => {
         <h1>All Articles</h1>
       </div>
       <div className="articles">
-        {posts.slice(1).map((post) => (
+        {posts.map((post) => (
           <div key={post.id}>
-            <img src={post.img} alt={`blog${post.id}`} />
+            <img src={post.bannerImg} alt={`blog${post.id}`} />
             <Link to={`/article/${post.id}`}>
               <h4>{post.title}</h4>
             </Link>

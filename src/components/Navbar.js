@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useState } from "react";
 import { BiSearchAlt } from "react-icons/bi";
 import { FiAlignJustify } from "react-icons/fi";
@@ -16,18 +16,19 @@ const Navbar = () => {
   return (
     <nav>
       <div className="website-logo">
-        <img src={logoBlack} alt="logo" className="logoTop" />
+        <Link to="/">
+          <img src={logoBlack} alt="logo" className="logoTop" />
+        </Link>
       </div>
 
-      <div className="search-bar">
+      {/* <div className="search-bar"></div> */}
+      <div className={showIcon ? "nav_link nav-active" : "nav_link"}>
         <form action="#" className="search">
           <input type="search" placeholder="search..." name="q" />
           <button type="submit">
             <BiSearchAlt />
           </button>
         </form>
-      </div>
-      <div className={showIcon ? "nav_link nav-active" : "nav_link"}>
         <NavLink
           exact={getValue.toString()}
           to="/"
@@ -44,7 +45,7 @@ const Navbar = () => {
         >
           ABOUT
         </NavLink>
-        <NavLink
+        {/* <NavLink
           exact={getValue.toString()}
           to="/link"
           onClick={handleClick}
@@ -59,7 +60,7 @@ const Navbar = () => {
           className={({ isActive }) => (isActive ? "active" : "inactive")}
         >
           PROJECTS
-        </NavLink>
+        </NavLink> */}
       </div>
 
       <div className="hamburger">

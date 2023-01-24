@@ -1,4 +1,4 @@
-import React from "react";
+// import React, { useState, useEffect } from "react";
 import { FaFacebook } from "react-icons/fa";
 import { BsTwitter } from "react-icons/bs";
 import { RiWhatsappFill } from "react-icons/ri";
@@ -10,6 +10,19 @@ import Author from "../images/author.jpeg";
 import Eyes from "../images/eyes.png";
 
 const SingleArticle = () => {
+  // const URL = "https://nordic-rose-api.onrender.com/author";
+  // const [temp, setTemp] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const res = await fetch(URL);
+  //     const data = await res.json();
+  //     setTemp(data);
+  //     console.log(data);
+  //   };
+  //   fetchData();
+  // }, []);
+
   // eslint-disable-next-line
   const { blogId } = useParams();
 

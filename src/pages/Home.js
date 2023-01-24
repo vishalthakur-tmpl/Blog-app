@@ -1,64 +1,62 @@
-// import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import PacmanLoader from "react-spinners/PacmanLoader";
 import AllArticles from "../components/AllArticles";
 import HomeBanner from "../components/HomeBanner";
-import banner from "../images/banner.svg";
-import img1 from "../images/img1.svg";
-import img2 from "../images/img2.svg";
-import img3 from "../images/img3.svg";
-import img4 from "../images/img4.svg";
-import img5 from "../images/img5.svg";
 
 const Home = () => {
-  // useEffect(() =>{
-  //   console.log('hello')
-  // },[])
+  const API = "https://nordic-rose-api.onrender.com/home";
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const posts = [
-    {
-      id: 0,
-      title:
-        "A few words about this blog platform, Ghost, and how this site wasm made",
-      subtitle:
-        "Why Ghost (& Figma) instead of Medium, Wordpress or other options?",
-      img: banner,
-    },
-    {
-      id: 1,
-      title: "Here are some things you should know regarding how we work",
-      img: img1,
-    },
-    {
-      id: 2,
-      title: "Here are some things you should know regarding how we work",
-      img: img2,
-    },
-    {
-      id: 3,
-      title: "Here are some things you should know regarding how we work",
-      img: img3,
-    },
-    {
-      id: 4,
-      title: "Here are some things you should know regarding how we work",
-      img: img4,
-    },
-    {
-      id: 5,
-      title: "Here are some things you should know regarding how we work",
-      img: img5,
-    },
-  ];
+  const apiData = async () => {
+    setLoading(true);
+    await axios
+      .get(API)
+      .then((res) => {
+        setData(res.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+  useEffect(() => {
+    apiData();
+  }, []);
 
   return (
     <div className="container">
-      <HomeBanner bannerBlog={posts[0]} />
-      <hr className="hr1-line" />
-
-      <div className="allArticles">
-        <AllArticles posts={posts} />
-      </div>
+      {loading ? (
+        <div className="loader">
+          <PacmanLoader size={20} color={"#F37A24"} />
+        </div>
+      ) : data && data.length > 0 ? (
+        <>
+          <HomeBanner bannerBlog={data[0]} />
+          <hr className="hr1-line" />
+          <div className="allArticles">
+            <AllArticles posts={data[1]} />
+          </div>
+        </>
+      ) : null}
     </div>
   );
 };
 
 export default Home;
+
+// const [data, setData] = useState([]);
+
+//   const apiData = async () => {
+//     try {
+//       const res = await axios.get("https://nordic-rose-api.onrender.com/home");
+//       setData(res.data);
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+//   useEffect(() => {
+//     apiData();
+//   }, []);
