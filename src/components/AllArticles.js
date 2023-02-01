@@ -1,7 +1,8 @@
 import React from "react";
+import Pagination from "@mui/material/Pagination";
 import { Link } from "react-router-dom";
 
-const AllArticles = ({ posts }) => {
+const AllArticles = ({ posts, totalPages, page, paginate }) => {
   return (
     <>
       <div>
@@ -9,14 +10,26 @@ const AllArticles = ({ posts }) => {
       </div>
       <div className="articles">
         {posts.map((post) => (
-          <div key={post.id}>
-            <img src={post.bannerImg} alt={`blog${post.id}`} />
-            <Link to={`/article/${post.id}`}>
-              <h4>{post.title}</h4>
-            </Link>
-          </div>
+          <Link to={`/article/${post.id}`} key={post.id}>
+            <div className="card">
+              <div className="card-img">
+                <img src={post.bannerImg} alt="article-img" />
+              </div>
+              <div className="card-title">
+                <h3>{post.title}</h3>
+              </div>
+            </div>
+          </Link>
         ))}
       </div>
+
+      <Pagination
+        className="pagination"
+        count={totalPages.length}
+        color="primary"
+        page={page}
+        onChange={(e, value) => paginate(value)}
+      />
     </>
   );
 };

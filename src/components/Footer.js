@@ -1,10 +1,7 @@
 import React from "react";
-// import { Link } from "react-router-dom";
 import logoWhite from "../images/logo-white.svg";
 
 const Footer = () => {
-  // const year = new Date().getFullYear();
-
   return (
     <div className="footer">
       <div>

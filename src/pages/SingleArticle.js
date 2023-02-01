@@ -1,155 +1,156 @@
-// import React, { useState, useEffect } from "react";
-import { FaFacebook } from "react-icons/fa";
-import { BsTwitter } from "react-icons/bs";
-import { RiWhatsappFill } from "react-icons/ri";
-import { Link, useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import PacmanLoader from "react-spinners/PacmanLoader";
+import { useParams } from "react-router-dom";
 import SingleArticleReco from "../components/SingleArticleReco";
 import SocialShare from "../components/SocialShare";
-import banner from "../images/banner.svg";
-import Author from "../images/author.jpeg";
+import AuthDetails from "../components/AuthDetails";
 import Eyes from "../images/eyes.png";
+import SignUp from "../components/SignUp";
 
 const SingleArticle = () => {
-  // const URL = "https://nordic-rose-api.onrender.com/author";
-  // const [temp, setTemp] = useState([]);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const res = await fetch(URL);
-  //     const data = await res.json();
-  //     setTemp(data);
-  //     console.log(data);
-  //   };
-  //   fetchData();
-  // }, []);
-
-  // eslint-disable-next-line
   const { blogId } = useParams();
+
+  const API = `https://nordic-rose-api.onrender.com/article/${blogId}`;
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const apiData = async () => {
+    setLoading(true);
+    await axios
+      .get(API)
+      .then((res) => {
+        setData(res.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+  useEffect(() => {
+    apiData();
+  }, [blogId]);
+
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const formattedDate = (blogDate) => {
+    const date = new Date(blogDate);
+    const monthName = monthNames[date.getMonth()];
+    const formatedDate =
+      monthName.slice(0, 3) + " " + date.getDate() + ", " + date.getFullYear();
+    return formatedDate;
+  };
 
   return (
     <>
-      <div className="article-container">
-        <div className="article-title">
-          <h1>
-            A few words about this blog platform, Ghost, and how this site was
-            made
-          </h1>
+      {loading ? (
+        <div className="loader">
+          <PacmanLoader size={20} color={"#F37A24"} />
         </div>
+      ) : data && Object.keys(data).length > 0 ? (
+        <>
+          <div className="article-container">
+            <div className="article-title">
+              <h1 id="top">{data.article.title}</h1>
+            </div>
 
-        <div className="article-subtitle">
-          <p>
-            Why Ghost (& Figma) instead of Medium, Wordpress or other options?
-          </p>
-        </div>
-      </div>
-      <div className="article-image">
-        <img src={banner} alt="Banner" className="article-banner" />
-      </div>
-      <div className="article-container">
-        <hr className="hr2-line" />
-
-        <div className="author-detail">
-          <div className="author-flex">
-            <img src={Author} alt="author" className="author-image" />
-            <div className="article-info">
-              <span className="author-name">Vishal Thakur</span>
-              <span className="publish-dateTime">
-                Apr 15, 2020 . 4 min read
-              </span>
+            <div className="article-subtitle">
+              <p>{data.article.subtitle}</p>
             </div>
           </div>
-          <div className="author-social-link">
-            <span>
-              <Link>
-                <FaFacebook />
-              </Link>
-            </span>
-            <span>
-              <Link>
-                <BsTwitter />
-              </Link>
-            </span>
-            <span>
-              <Link>
-                <RiWhatsappFill />
-              </Link>
-            </span>
+          <div className="article-image">
+            <img
+              src={data.article.bannerImg}
+              alt="Banner"
+              className="article-banner"
+            />
           </div>
-        </div>
+          <div className="article-container">
+            <hr className="hr2-line" />
 
-        <div className="article-desc">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu
-            velit tempus erat egestas efficitur. In hac habitasse platea
-            dictumst. Fusce a nunc eget ligula suscipit finibus. Aenean pharetra
-            quis lacus at viverra. Class aptent taciti sociosqu ad litora
-            torquent per conubia nostra, per inceptos himenaeos. Aliquam quis
-            posuere ligula. In eu dui molestie, molestie lectus eu, semper
-            lectus.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu
-            velit tempus erat egestas efficitur. In hac habitasse platea
-            dictumst. Fusce a nunc eget ligula suscipit finibus. Aenean pharetra
-            quis lacus at viverra. Class aptent taciti sociosqu ad litora
-            torquent per conubia nostra, per inceptos himenaeos. Aliquam quis
-            posuere ligula. In eu dui molestie, molestie lectus eu, semper
-            lectus.
-          </p>
-
-          <div className="article-socialShare">
-            <SocialShare />
-          </div>
-
-          <div className="article-tags">
-            <h4>Tags: </h4>
-            <ul className="article-tagList">
-              <li>product design</li>
-              <li>culture</li>
-            </ul>
-          </div>
-
-          <hr className="hr3-line" />
-
-          <div className="about-author">
-            <div>
-              <img src={Author} alt="author" className="author-image" />
+            <div className="author-detail">
+              <AuthDetails data={data} formattedDate={formattedDate} />
             </div>
-            <div className="about">
-              <span className="author-name">Vishal Thakur </span>
-              <span>
-                is a Design Founder & Advisor, Berlin School of Creative
-                Leadership Executive MBA participant, Zippie advisor, Wolt
-                co-founder, and Nordic Rose stakeholder.
-              </span>
+
+            <div className="article-desc">
+              <p style={{ paddingBottom: "35px" }}>{data.article.shortDesc}</p>
+              <h3 style={{ paddingBottom: "35px" }}>
+                {data.article.subheading}
+              </h3>
+              <div className="content-image">
+                <img src={data.article.contentImg} alt="content-img" />
+                <p style={{ fontSize: "14px", paddingBottom: "35px" }}>
+                  {data.article.contentImgDesc}
+                </p>
+              </div>
+              <p style={{ paddingBottom: "35px" }}>
+                {data.article.description}
+              </p>
+
+              <div className="article-socialShare">
+                <SocialShare />
+              </div>
+
+              <div className="article-tags">
+                <h4>Tags: </h4>
+                <ul className="article-tagList">
+                  {data.article.tags.split(",").map((tag, index) => (
+                    <li key={index}>{tag}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <hr className="hr3-line" />
+
+              <div className="about-author">
+                <div>
+                  <img
+                    src={data.article.Author.profileImg}
+                    alt="author"
+                    className="author-image"
+                  />
+                </div>
+                <div className="about">
+                  <span className="author-name">
+                    {data.article.Author.fullName}{" "}
+                  </span>
+                  <span>{data.article.Author.about}</span>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <div className="image-on-hr4">
-        <hr className="hr4-line" />
-        <img src={Eyes} alt="eyesPng" className="eyes-on-hr4" />
-      </div>
-
-      <div className="readNext">
-        <h1>What to read next</h1>
-        <div className="read-more-articles">
-          <SingleArticleReco />
-        </div>
-
-        <div className="signUpField">
-          <h2>Sign up for the newsletter</h2>
-          <p>
-            If you want relevant updates occasionally, sign up for the private
-            newsletter. Your email is never shared.
-          </p>
-          <div className="inputEmail">
-            <input type="email" placeholder="Enter your email..." />
-            <button type="submit">SIGN UP</button>
+          <div className="image-on-hr4">
+            <hr className="hr4-line" />
+            <img src={Eyes} alt="eyesPng" className="eyes-on-hr4" />
           </div>
-        </div>
-      </div>
+
+          <div className="readNext">
+            <h1>What to read next</h1>
+            <div className="read-more-articles">
+              <SingleArticleReco readNext={data.readNext} />
+            </div>
+
+            <div className="signUpField">
+              <SignUp />
+            </div>
+          </div>
+        </>
+      ) : null}
     </>
   );
 };
